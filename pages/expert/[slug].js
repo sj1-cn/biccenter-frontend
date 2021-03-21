@@ -6,14 +6,14 @@ import Image from "../../components/image";
 import Seo from "../../components/seo";
 import { getStrapiMedia } from "../../lib/media";
 
-const Enterprise = ({ enterprise, categories }) => {
-  const imageUrl = getStrapiMedia(enterprise.image);
+const Article = ({ expert, categories }) => {
+  const imageUrl = getStrapiMedia(expert.image);
 
   const seo = {
-    metaTitle: enterprise.title,
-    metaDescription: enterprise.description,
-    shareImage: enterprise.image,
-    enterprise: true,
+    metaTitle: expert.title,
+    metaDescription: expert.description,
+    shareImage: expert.image,
+    expert: true,
   };
 
   return (
@@ -26,17 +26,17 @@ const Enterprise = ({ enterprise, categories }) => {
         data-srcset={imageUrl}
         data-uk-img
       >
-        <h1>{enterprise.title}</h1>
+        <h1>{expert.title}</h1>
       </div>
       <div className="uk-section">
         <div className="uk-container uk-container-small">
-          <ReactMarkdown source={enterprise.content} escapeHtml={false} />
+          <ReactMarkdown source={expert.content} escapeHtml={false} />
           <hr className="uk-divider-small" />
           <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
             <div>
-              {enterprise.author.picture && (
+              {expert.author.picture && (
                 <Image
-                  image={enterprise.author.picture}
+                  image={expert.author.picture}
                   style={{
                     position: "static",
                     borderRadius: "50%",
@@ -47,10 +47,10 @@ const Enterprise = ({ enterprise, categories }) => {
             </div>
             <div className="uk-width-expand">
               <p className="uk-margin-remove-bottom">
-                By {enterprise.author.name}
+                By {expert.author.name}
               </p>
               <p className="uk-text-meta uk-margin-remove-top">
-                <Moment format="MMM Do YYYY">{enterprise.published_at}</Moment>
+                <Moment format="MMM Do YYYY">{expert.published_at}</Moment>
               </p>
             </div>
           </div>
@@ -61,12 +61,12 @@ const Enterprise = ({ enterprise, categories }) => {
 };
 
 export async function getStaticPaths() {
-  const enterprises = await fetchAPI("/enterprises");
+  const experts = await fetchAPI("/experts");
 
   return {
-    paths: enterprises.map((enterprise) => ({
+    paths: experts.map((expert) => ({
       params: {
-        slug: enterprise.slug,
+        slug: expert.slug,
       },
     })),
     fallback: false,
@@ -74,15 +74,15 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const enterprises = await fetchAPI(
-    `/enterprises?slug=${params.slug}&status=published`
+  const experts = await fetchAPI(
+    `/experts?slug=${params.slug}&status=published`
   );
-  const categories = await fetchAPI("/categories");
+  const categories = await fetchAPI("/expert-categories");
 
   return {
-    props: { enterprise: enterprises[0], categories },
+    props: { expert: experts[0], categories },
     revalidate: 1,
   };
 }
 
-export default Enterprise;
+export default Article;

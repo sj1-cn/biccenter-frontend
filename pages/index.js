@@ -4,7 +4,7 @@ import Layout from "../components/layout";
 import Seo from "../components/seo";
 import { fetchAPI } from "../lib/api";
 
-const Home = ({ articles, categories, homepage }) => {
+const Home = ({ /*enterprises,exports,organizations, */articles, categories, homepage}) => {
   return (
     <Layout categories={categories}>
       <Seo seo={homepage.seo} />
@@ -20,14 +20,17 @@ const Home = ({ articles, categories, homepage }) => {
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const [articles, categories, homepage] = await Promise.all([
+  const [/*enterprises,exports,organizations,*/ articles, categories, homepage] = await Promise.all([
+    // fetchAPI("/enterprises?status=published"),
+    // fetchAPI("/exports?status=published"),
+    // fetchAPI("/organizations?status=published"),
     fetchAPI("/articles?status=published"),
     fetchAPI("/categories"),
     fetchAPI("/homepage"),
   ]);
 
   return {
-    props: { articles, categories, homepage },
+    props: { /*enterprises, exports, organizations, */ articles, categories, homepage },
     revalidate: 1,
   };
 }
