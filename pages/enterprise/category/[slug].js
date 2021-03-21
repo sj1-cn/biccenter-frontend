@@ -1,8 +1,8 @@
 import React from "react";
-import Experts from "../../components/experts";
-import Layout from "../../components/layout";
+import Experts from '../../../components/experts' ;//"../../../../components/experts";
+import Layout from "../../../components/layout";
 // import Seo from "../../components/seo";
-import { fetchAPI } from "../../lib/api";
+import { fetchAPI } from "../../../lib/api";
 import Link from "next/link";
 
 const ExpertIndex = ({ experts, categories }) => {
@@ -17,12 +17,12 @@ const ExpertIndex = ({ experts, categories }) => {
               {categories.map((category) => {
                 return (
                   <li key={category.id}>
-                    <Link
-                      as={`/expert/category/${category.slug}`}
-                      href="/expert/category/[id]"
-                    >
-                      <a className="uk-link-reset">{category.name}</a>
-                    </Link>
+                  <Link
+                    as={`/expert/category/${category.slug}`}
+                    href="/expert/category/[id]"
+                  >
+                    <a className="uk-link-reset">{category.name}</a>
+                  </Link>
                   </li>
                 );
               })}
@@ -35,12 +35,26 @@ const ExpertIndex = ({ experts, categories }) => {
   );
 };
 
-export async function getStaticProps() {
+export async function getStaticPaths() {
+  const categories = await fetchAPI("/expert-categories");
+  console.log(categories)
+  return {
+    paths: categories.map((category) => ({
+      params: {
+        slug: category.slug,
+      },
+    })),
+    fallback: false,
+  };
+}
+
+export async function getStaticProps({ params }) {
   // Run API calls in parallel
   const [experts, categories] = await Promise.all([
-    fetchAPI("/experts?status=published"),
+    fetchAPI(`/experts?category.slug=${params.slug}&status=published`),
     fetchAPI("/expert-categories"),
   ]);
+
 
   return {
     props: { experts, categories },

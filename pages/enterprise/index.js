@@ -10,7 +10,21 @@ const EnterpriseIndex = ({ enterprises, categories}) => {
       {/* <Seo seo={homepage.seo} /> */}
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <h1>企业</h1>
+          <h1>企业</h1>            
+          <ul className="uk-navbar-nav">
+              {categories.map((category) => {
+                return (
+                  <li key={category.id}>
+                    <Link
+                      as={`/enterpise/category/${category.slug}`}
+                      href="/enterpise/category/[id]"
+                    >
+                      <a className="uk-link-reset">{category.name}</a>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
           <Enterprises articles={enterprises} />
         </div>
       </div>

@@ -74,9 +74,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const experts = await fetchAPI(
-    `/experts?id=${params.id}&status=published`
-  );
+  const experts = await fetchAPI(`/experts?id=${params.id}&status=published`);
   const categories = await fetchAPI("/expert-categories");
 
   return {

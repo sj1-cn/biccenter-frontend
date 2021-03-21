@@ -4,13 +4,29 @@ import Layout from "../../components/layout";
 // import Seo from "../../components/seo";
 import { fetchAPI } from "../../lib/api";
 
-const Home = ({ organizations, categories}) => {
+const OrganizationIndex = ({ organizations, categories}) => {
   return (
     <Layout categories={categories}>
       {/* <Seo seo={homepage.seo} /> */}
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <h1>企业</h1>
+          <h1>研究机构</h1>
+          <div className="uk-navbar-right">专家分类:       
+          <ul className="uk-switcher">
+              {categories.map((category) => {
+                return (
+                  <li key={category.id}>
+                    <Link
+                      as={`/organization/category/${category.slug}`}
+                      href="/organization/category/[id]"
+                    >
+                      <a className="uk-link-reset">{category.name}</a>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
           <Organizations articles={organizations} />
         </div>
       </div>
@@ -31,4 +47,4 @@ export async function getStaticProps() {
   };
 }
 
-export default Home;
+export default OrganizationIndex;
