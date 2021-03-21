@@ -1,17 +1,17 @@
 import React from "react";
-import Articles from "../../components/articles";
+import Experts from "../../components/experts";
 import Layout from "../../components/layout";
 // import Seo from "../../components/seo";
 import { fetchAPI } from "../../lib/api";
 
-const Home = ({ experts, categories}) => {
+const ExpertIndex = ({ experts, categories}) => {
   return (
     <Layout categories={categories}>
       {/* <Seo seo={homepage.seo} /> */}
       <div className="uk-section">
         <div className="uk-container uk-container-large">
           <h1>专家学者</h1>
-          <Articles articles={experts} />
+          <Experts articles={experts} />
         </div>
       </div>
     </Layout>
@@ -31,4 +31,4 @@ export async function getStaticProps() {
   };
 }
 
-export default Home;
+export default ExpertIndex;

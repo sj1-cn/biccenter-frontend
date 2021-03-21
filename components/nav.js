@@ -17,7 +17,7 @@ const Nav = ({ categories }) => {
         <div className="uk-navbar-right">
           <ul className="uk-navbar-nav">
                 <li key="Enterprise">
-                  <Link as={`/Home/`} href="/">
+                  <Link as={`/`} href="/">
                     <a className="uk-link-reset">首页</a>
                   </Link>
                 </li>

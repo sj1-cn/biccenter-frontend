@@ -1,5 +1,5 @@
 import React from "react";
-import Articles from "../../components/articles";
+import Organizations from "../../components/organizations";
 import Layout from "../../components/layout";
 // import Seo from "../../components/seo";
 import { fetchAPI } from "../../lib/api";
@@ -11,7 +11,7 @@ const Home = ({ organizations, categories}) => {
       <div className="uk-section">
         <div className="uk-container uk-container-large">
           <h1>企业</h1>
-          <Articles articles={organizations} />
+          <Organizations articles={organizations} />
         </div>
       </div>
     </Layout>
