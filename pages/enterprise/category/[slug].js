@@ -37,7 +37,6 @@ const EnterprisesCategoryIndex = ({ enterprises, categories}) => {
 
 export async function getStaticPaths() {
   const categories = await fetchAPI("/enterprise-categories");
-  // console.log(categories)
   return {
     paths: categories.map((category) => ({
       params: {

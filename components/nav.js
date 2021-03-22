@@ -6,10 +6,9 @@ import Image from "./image";
 
 const Nav = ({categories }) => {
   const { banner } = useContext(GlobalContext);
-  console.log("nav " + banner);
   return (
     <div>
-      <nav className="uk-navbar-container" data-uk-navbar>
+      <nav className="uk-navbar-container uk-navbar" data-uk-navbar>
         <div className="uk-navbar-left">
           <ul className="uk-navbar-nav">
             <li>
@@ -21,28 +20,28 @@ const Nav = ({categories }) => {
         </div>
         <div className="uk-navbar-right">
           <ul className="uk-navbar-nav">
-                <li key="Enterprise">
+                <li key="home">
                   <Link as={`/`} href="/">
                     <a className="uk-link-reset">首页</a>
                   </Link>
                 </li>
-                <li key="Enterprise">
+                <li key="enterprise">
                   <Link as={`/enterprise`} href="/enterprise">
                     <a className="uk-link-reset">企业</a>
                   </Link>
                 </li>
-                <li key="Export">
+                <li key="export">
                   <Link as={`/expert`} href="/expert">
                     <a className="uk-link-reset">专家学者</a>
                   </Link>
                 </li>
-                <li key="Organization">
+                <li key="organization">
                   <Link as={`/organization`} href="/organization">
                     <a className="uk-link-reset">研究机构</a>
                   </Link>
                 </li>
-                <li key="Article">
-                  <Link as={`article`} href="/article">
+                <li key="article">
+                  <Link as={`/article`} href="/article">
                     <a className="uk-link-reset">质量与品牌专栏</a>
                   </Link>
                 </li>
