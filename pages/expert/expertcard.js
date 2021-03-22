@@ -1,10 +1,10 @@
 import React from "react";
 import Link from "next/link";
-import Image from "./image";
+import Image from "../../components/image";
 
-const EnterpriseCard = ({ article }) => {
+const ExpertCard = ({ article }) => {
   return (
-    <Link as={`/enterprise/${article.id}`} href="/enterprise/[id]">
+    <Link as={`/expert/${article.id}`} href="/expert/[id]">
       <a className="uk-link-reset">
         <div className="uk-card uk-card-muted">
           <div className="uk-card-media-top">
@@ -24,4 +24,4 @@ const EnterpriseCard = ({ article }) => {
   );
 };
 
-export default EnterpriseCard;
+export default ExpertCard;

@@ -1,5 +1,5 @@
 import React from "react";
-import Experts from '../../../components/experts' ;//"../../../../components/experts";
+import Experts from '../experts' ;
 import Layout from "../../../components/layout";
 // import Seo from "../../components/seo";
 import { fetchAPI } from "../../../lib/api";

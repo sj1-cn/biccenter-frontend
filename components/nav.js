@@ -1,7 +1,12 @@
 import React from "react";
 import Link from "next/link";
+import { useContext } from "react";
+import { GlobalContext } from "../pages/_app";
+import Image from "./image";
 
-const Nav = ({ categories }) => {
+const Nav = ({categories }) => {
+  const { banner } = useContext(GlobalContext);
+  console.log("nav " + banner);
   return (
     <div>
       <nav className="uk-navbar-container" data-uk-navbar>
@@ -9,7 +14,7 @@ const Nav = ({ categories }) => {
           <ul className="uk-navbar-nav">
             <li>
               <Link href="/">
-                <a>长三角质量品牌联盟</a>
+                <a><Image image={banner} style={{position: "static",borderRadius: "5%",height: 60,}}/></a>
               </Link>
             </li>
           </ul>

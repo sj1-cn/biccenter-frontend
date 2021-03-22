@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "./card";
+import ArticleCard from "./articlecard";
 
 const Articles = ({ articles }) => {
   const leftArticlesCount = Math.ceil(articles.length / 5);
@@ -12,7 +12,7 @@ const Articles = ({ articles }) => {
         <div>
           {leftArticles.map((article, i) => {
             return (
-              <Card article={article} key={`article__left__${article.slug}`} />
+              <ArticleCard article={article} key={`article__left__${article.slug}`} />
             );
           })}
         </div>
@@ -20,7 +20,7 @@ const Articles = ({ articles }) => {
           <div className="uk-child-width-1-2@m uk-grid-match" data-uk-grid>
             {rightArticles.map((article, i) => {
               return (
-                <Card
+                <ArticleCard
                   article={article}
                   key={`article__left__${article.slug}`}
                 />

@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Image from "./image";
+import Image from "../../components/image";
 
 const OrganizationCard = ({ article }) => {
   return (

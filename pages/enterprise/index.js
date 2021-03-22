@@ -1,5 +1,5 @@
 import React from "react";
-import Enterprises from "../../components/enterprises";
+import Enterprises from "./enterprises";
 import Layout from "../../components/layout";
 // import Seo from "../../components/seo";
 import { fetchAPI } from "../../lib/api";

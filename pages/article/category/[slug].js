@@ -1,7 +1,6 @@
 import React from "react";
-import Experts from '../../../components/experts' ;//"../../../../components/experts";
+import Articles from '../articles' ;
 import Layout from "../../../components/layout";
-// import Seo from "../../components/seo";
 import { fetchAPI } from "../../../lib/api";
 import Link from "next/link";
 
@@ -28,7 +27,7 @@ const ExpertIndex = ({ experts, categories }) => {
               })}
             </ul>
           </div>
-          <Experts articles={experts} />
+          <Articles articles={experts} />
         </div>
       </div>
     </Layout>
@@ -51,8 +50,8 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   // Run API calls in parallel
   const [experts, categories] = await Promise.all([
-    fetchAPI(`/experts?category.slug=${params.slug}&status=published`),
-    fetchAPI("/expert-categories"),
+    fetchAPI(`/articles?category.slug=${params.slug}&status=published`),
+    fetchAPI("/categories"),
   ]);
 
 
