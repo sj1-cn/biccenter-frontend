@@ -3,6 +3,7 @@ import Enterprises from "../../components/enterprises";
 import Layout from "../../components/layout";
 // import Seo from "../../components/seo";
 import { fetchAPI } from "../../lib/api";
+import Link from "next/link";
 
 const EnterpriseIndex = ({ enterprises, categories}) => {
   return (
@@ -10,14 +11,15 @@ const EnterpriseIndex = ({ enterprises, categories}) => {
       {/* <Seo seo={homepage.seo} /> */}
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <h1>企业</h1>            
+          <h1>企业</h1>          
+          <div className="uk-navbar-right">研究机构分类:       
           <ul className="uk-navbar-nav">
               {categories.map((category) => {
                 return (
                   <li key={category.id}>
                     <Link
-                      as={`/enterpise/category/${category.slug}`}
-                      href="/enterpise/category/[id]"
+                      as={`/enterprise/category/${category.slug}`}
+                      href="/enterprise/category/[id]"
                     >
                       <a className="uk-link-reset">{category.name}</a>
                     </Link>
@@ -25,6 +27,7 @@ const EnterpriseIndex = ({ enterprises, categories}) => {
                 );
               })}
             </ul>
+            </div>
           <Enterprises articles={enterprises} />
         </div>
       </div>

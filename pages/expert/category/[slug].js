@@ -5,7 +5,7 @@ import Layout from "../../../components/layout";
 import { fetchAPI } from "../../../lib/api";
 import Link from "next/link";
 
-const ExpertIndex = ({ experts, categories }) => {
+const ExpertIndex = ({ experts, categories}) => {
   return (
     <Layout categories={categories}>
       {/* <Seo seo={homepage.seo} /> */}
@@ -37,7 +37,6 @@ const ExpertIndex = ({ experts, categories }) => {
 
 export async function getStaticPaths() {
   const categories = await fetchAPI("/expert-categories");
-  console.log(categories)
   return {
     paths: categories.map((category) => ({
       params: {

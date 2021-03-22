@@ -3,6 +3,7 @@ import Organizations from "../../components/organizations";
 import Layout from "../../components/layout";
 // import Seo from "../../components/seo";
 import { fetchAPI } from "../../lib/api";
+import Link from "next/link";
 
 const OrganizationIndex = ({ organizations, categories}) => {
   return (
@@ -11,8 +12,8 @@ const OrganizationIndex = ({ organizations, categories}) => {
       <div className="uk-section">
         <div className="uk-container uk-container-large">
           <h1>研究机构</h1>
-          <div className="uk-navbar-right">专家分类:       
-          <ul className="uk-switcher">
+          <div className="uk-navbar-right">研究机构分类:       
+          <ul className="uk-navbar-nav">
               {categories.map((category) => {
                 return (
                   <li key={category.id}>

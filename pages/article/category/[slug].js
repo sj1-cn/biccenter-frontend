@@ -1,34 +1,34 @@
 import React from "react";
-import Organizations from '../../../components/organizations' ;
+import Experts from '../../../components/experts' ;//"../../../../components/experts";
 import Layout from "../../../components/layout";
 // import Seo from "../../components/seo";
 import { fetchAPI } from "../../../lib/api";
 import Link from "next/link";
 
-const OrganizationCategoryIndex = ({ organizations, categories}) => {
+const ExpertIndex = ({ experts, categories }) => {
   return (
     <Layout categories={categories}>
       {/* <Seo seo={homepage.seo} /> */}
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <h1>研究机构</h1>
-          <div className="uk-navbar-right">研究机构分类:        
-          <ul className="uk-navbar-nav">
+          <h1>专家学者</h1>
+          <div className="uk-navbar-right">专家分类:
+            <ul className="uk-navbar-nav">
               {categories.map((category) => {
                 return (
                   <li key={category.id}>
-                    <Link
-                      as={`/organization/category/${category.slug}`}
-                      href="/organization/category/[id]"
-                    >
-                      <a className="uk-link-reset">{category.name}</a>
-                    </Link>
+                  <Link
+                    as={`/expert/category/${category.slug}`}
+                    href="/expert/category/[id]"
+                  >
+                    <a className="uk-link-reset">{category.name}</a>
+                  </Link>
                   </li>
                 );
               })}
             </ul>
           </div>
-          <Organizations articles={organizations} />
+          <Experts articles={experts} />
         </div>
       </div>
     </Layout>
@@ -36,7 +36,8 @@ const OrganizationCategoryIndex = ({ organizations, categories}) => {
 };
 
 export async function getStaticPaths() {
-  const categories = await fetchAPI("/organization-categories");
+  const categories = await fetchAPI("/expert-categories");
+  console.log(categories)
   return {
     paths: categories.map((category) => ({
       params: {
@@ -49,16 +50,16 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   // Run API calls in parallel
-  const [organizations, categories] = await Promise.all([
-    fetchAPI(`/organizations?category.slug=${params.slug}&status=published`),
-    fetchAPI("/organization-categories"),
+  const [experts, categories] = await Promise.all([
+    fetchAPI(`/experts?category.slug=${params.slug}&status=published`),
+    fetchAPI("/expert-categories"),
   ]);
 
 
   return {
-    props: { organizations, categories },
+    props: { experts, categories },
     revalidate: 1,
   };
 }
 
-export default OrganizationCategoryIndex;
+export default ExpertIndex;
