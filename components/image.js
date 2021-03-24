@@ -1,6 +1,6 @@
 import { getStrapiMedia } from "../lib/media";
 
-const Image = ({ image, style }) => {
+const Image = ({ image, style,...rest }) => {
   const imageUrl = getStrapiMedia(image);
 
   return (
@@ -8,6 +8,7 @@ const Image = ({ image, style }) => {
       src={imageUrl}
       alt={image.alternativeText || image.name}
       style={style}
+      {...rest} 
     />
   );
 };

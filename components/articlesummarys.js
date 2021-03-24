@@ -1,8 +1,8 @@
 import React from "react";
-import Image from "../../components/image";
+import Image from "./image";
 import Link from "next/link";
 
-const ArticleSummarys = ({ articles }) => {
+const ArticleSummarys = ({type, articles }) => {
   return (
     <div>
       <div className="uk-child-width-1-1@s" data-uk-grid="true">
@@ -10,7 +10,8 @@ const ArticleSummarys = ({ articles }) => {
           <div className="uk-child-width-1-2@m uk-grid-match" data-uk-grid>
             {articles.map((article, i) => {
               return (
-                <Link key={article.id} as={`/article/${article.slug}`} href="/article/[id]">
+                <Link key={article.id} as={`/${type}/${article.id}`} href={`/${type}/[id]`}>
+                <a className="uk-link-reset">
                 <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
                   <div>
                       <Image
@@ -24,10 +25,10 @@ const ArticleSummarys = ({ articles }) => {
                   </div>
                   <div className="uk-width-expand">
                     <p className="uk-margin-remove-bottom">
-                      By {article.title}
+                      {article.title}
                     </p>
                   </div>
-                </div>
+                </div></a>
               </Link>
               );
             })}

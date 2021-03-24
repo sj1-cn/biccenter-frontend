@@ -12,7 +12,7 @@ const Articles = ({ articles }) => {
         <div>
           {leftArticles.map((article, i) => {
             return (
-              <ArticleCard article={article} key={`article__left__${article.slug}`} />
+              <ArticleCard type="article" article={article} key={`article__left__${article.slug}`} />
             );
           })}
         </div>
