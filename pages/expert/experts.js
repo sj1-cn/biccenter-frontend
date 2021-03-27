@@ -8,19 +8,16 @@ const Experts = ({ articles }) => {
 
   return (
     <div>
-      <div className="uk-child-width-1-2@s" data-uk-grid="true">
-        <div>
-          <div className="uk-child-width-1-2@m uk-grid-match" data-uk-grid>
-            {articles.map((article, i) => {
-              return (
-                <ExpertCard
-                  article={article}
-                  key={`article__left__${article.slug}`}
-                />
-              );
-            })}
-          </div>
-        </div>
+      <div className="uk-child-width-1-4@m uk-grid-small uk-grid-match" data-uk-grid>
+        
+          {articles.map((article, i) => {
+            return (
+              <div><ExpertCard
+                article={article}
+                key={`article__left__${article.slug}`}
+              /></div>
+            );
+          })}
       </div>
     </div>
   );

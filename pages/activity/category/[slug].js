@@ -1,19 +1,20 @@
 import React from "react";
-import Organizations from '../organizations' ;
 import Layout from "../../../components/layout";
-// import Seo from "../../components/seo";
 import { fetchAPI } from "../../../lib/api";
 import Link from "next/link";
+import Activities from "../activities";
 import CategoryNav from '../../../components/categorynav';
-const OrganizationCategoryIndex = ({ currentCategorySlug,organizations, categories}) => {
+
+const ExpertIndex = ({currentCategorySlug, experts, categories }) => {
+
   return (
     <Layout categories={categories}>
       {/* <Seo seo={homepage.seo} /> */}
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <h1>研究机构</h1>
-          <CategoryNav type="organization" categories={categories} title="机构分类" slug={currentCategorySlug}/>
-          <Organizations articles={organizations} />
+          <h1>活动动态</h1>
+          <CategoryNav type="activity" categories={categories} title="动态分类" slug={currentCategorySlug}/>
+          <Activities articles={experts} />
         </div>
       </div>
     </Layout>
@@ -21,7 +22,7 @@ const OrganizationCategoryIndex = ({ currentCategorySlug,organizations, categori
 };
 
 export async function getStaticPaths() {
-  const categories = await fetchAPI("/organization-categories");
+  const categories = await fetchAPI("/activity-categories");
   return {
     paths: categories.map((category) => ({
       params: {
@@ -35,16 +36,16 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
   let currentCategorySlug = params.slug;
   // Run API calls in parallel
-  const [organizations, categories] = await Promise.all([
-    fetchAPI(`/organizations?category.slug=${params.slug}&status=published`),
-    fetchAPI("/organization-categories"),
+  const [experts, categories] = await Promise.all([
+    fetchAPI(`/activities?category.slug=${params.slug}&status=published`),
+    fetchAPI("/activity-categories"),
   ]);
 
 
   return {
-    props: { currentCategorySlug,organizations, categories},
+    props: { currentCategorySlug,experts, categories },
     revalidate: 1,
   };
 }
 
-export default OrganizationCategoryIndex;
+export default ExpertIndex;

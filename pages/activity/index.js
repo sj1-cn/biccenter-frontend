@@ -1,20 +1,19 @@
 import React from "react";
-import Organizations from "./organizations";
 import Layout from "../../components/layout";
 // import Seo from "../../components/seo";
 import { fetchAPI } from "../../lib/api";
-import Link from "next/link";
+import Activities from "./activities";
 import CategoryNav from "../../components/categorynav";
 
-const OrganizationIndex = ({ organizations, categories}) => {
+const ActivityIndex = ({ articles, categories}) => {
   return (
     <Layout categories={categories}>
       {/* <Seo seo={homepage.seo} /> */}
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <h1>研究机构</h1>
-          <CategoryNav type="organization" categories={categories} title="机构分类"/>
-          <Organizations articles={organizations} />
+          <h1>动态</h1>
+          <CategoryNav type="activity" categories={categories} title="动态分类"/>
+          <Activities articles={articles} />
         </div>
       </div>
     </Layout>
@@ -23,15 +22,15 @@ const OrganizationIndex = ({ organizations, categories}) => {
 
 export async function getStaticProps() {
   // Run API calls in parallel
-  const [organizations, categories] = await Promise.all([
-    fetchAPI("/organizations?status=published"),
-    fetchAPI("/organization-categories")
+  const [articles, categories] = await Promise.all([
+    fetchAPI("/activities?status=published"),
+    fetchAPI("/activity-categories")
   ]);
 
   return {
-    props: { organizations, categories },
+    props: { articles, categories },
     revalidate: 1,
   };
 }
 
-export default OrganizationIndex;
+export default ActivityIndex;

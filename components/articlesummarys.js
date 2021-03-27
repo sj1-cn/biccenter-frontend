@@ -12,23 +12,15 @@ const ArticleSummarys = ({type, articles }) => {
               return (
                 <Link key={article.id} as={`/${type}/${article.id}`} href={`/${type}/[id]`}>
                 <a className="uk-link-reset">
-                <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
-                  <div>
-                      <Image
-                        image={article.image}
-                        style={{
-                          position: "static",
-                          borderRadius: "5%",
-                          height: 30,
-                        }}
-                      />
+                  <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
+                    <Image image={article.image}style={{ height: 60,}}/>
+                    <div className="uk-width-expand">
+                      <p className="uk-margin-remove-bottom">
+                        {article.title}
+                      </p>
+                    </div>
                   </div>
-                  <div className="uk-width-expand">
-                    <p className="uk-margin-remove-bottom">
-                      {article.title}
-                    </p>
-                  </div>
-                </div></a>
+                </a>
               </Link>
               );
             })}

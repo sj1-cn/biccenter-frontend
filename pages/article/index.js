@@ -3,6 +3,7 @@ import Articles from "./articles";
 import Layout from "../../components/layout";
 // import Seo from "../../components/seo";
 import { fetchAPI } from "../../lib/api";
+import CategoryNav from "../../components/categorynav";
 
 const Home = ({ articles, categories}) => {
   return (
@@ -11,6 +12,7 @@ const Home = ({ articles, categories}) => {
       <div className="uk-section">
         <div className="uk-container uk-container-large">
           <h1>质量与品牌专栏</h1>
+          <CategoryNav type="article" categories={categories} title="分类"/>
           <Articles articles={articles} />
         </div>
       </div>

@@ -3,30 +3,16 @@ import Articles from '../articles' ;
 import Layout from "../../../components/layout";
 import { fetchAPI } from "../../../lib/api";
 import Link from "next/link";
+import CategoryNav from '../../../components/categorynav';
 
-const ExpertIndex = ({ experts, categories }) => {
+const ArticleIndex = ({ currentCategorySlug,experts, categories }) => {
   return (
     <Layout categories={categories}>
       {/* <Seo seo={homepage.seo} /> */}
       <div className="uk-section">
         <div className="uk-container uk-container-large">
-          <h1>专家学者</h1>
-          <div className="uk-navbar-right">专家分类:
-            <ul className="uk-navbar-nav">
-              {categories.map((category) => {
-                return (
-                  <li key={category.id}>
-                  <Link
-                    as={`/expert/category/${category.slug}`}
-                    href="/expert/category/[id]"
-                  >
-                    <a className="uk-link-reset">{category.name}</a>
-                  </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+          <h1>质量与品牌专栏</h1>
+          <CategoryNav type="article" categories={categories} title="分类" slug={currentCategorySlug}/>
           <Articles articles={experts} />
         </div>
       </div>
@@ -35,7 +21,7 @@ const ExpertIndex = ({ experts, categories }) => {
 };
 
 export async function getStaticPaths() {
-  const categories = await fetchAPI("/expert-categories");
+  const categories = await fetchAPI("/categories");
   console.log(categories)
   return {
     paths: categories.map((category) => ({
@@ -43,11 +29,12 @@ export async function getStaticPaths() {
         slug: category.slug,
       },
     })),
-    fallback: false,
+    fallback: 'blocking',
   };
 }
 
 export async function getStaticProps({ params }) {
+  let currentCategorySlug = params.slug;
   // Run API calls in parallel
   const [experts, categories] = await Promise.all([
     fetchAPI(`/articles?category.slug=${params.slug}&status=published`),
@@ -56,9 +43,9 @@ export async function getStaticProps({ params }) {
 
 
   return {
-    props: { experts, categories },
+    props: {currentCategorySlug, experts, categories },
     revalidate: 1,
   };
 }
 
-export default ExpertIndex;
+export default ArticleIndex;

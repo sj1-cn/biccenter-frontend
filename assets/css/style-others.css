@@ -1,0 +1,16 @@
+
+.qz_ser{display: block; list-style: none;}
+
+.qz_ser li{list-style: none; float: left;width:200px;padding:3px 0px 3px 25px;position:relative; opacity: 1;margin:0px 7px;}
+
+.qz_ser li img{margin-bottom:10px;float:right;}
+
+.qz_ser li:hover{box-shadow: 0 0 10px #aaa; }
+
+.qz_ser li>a>div{font-family: "微软雅黑";font-size: 12px;color: #aaa;width:100px;float:left;padding-top:28px;}
+
+.qz_ser li>a>div>h3{height:26px;line-height: 26px;font-size: 24px;font-weight: bold;color: #666;margin-bottom: 5px;font-family: "微软雅黑";word-spacing: 8px;letter-spacing: 3px;}
+
+.qz_ser li h3 p{font-size: 14px;line-height: 24px;}
+
+.qz_wrap{width: 1200px;margin: 0 auto;}

@@ -7,19 +7,19 @@ import Seo from "../../components/seo";
 import { getStrapiMedia } from "../../lib/media";
 import { useRouter } from 'next/router'
 
-const Article = ({ expert, categories }) => {
+const Activity = ({ article, categories }) => {
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>;
   }
 
-  const imageUrl = getStrapiMedia(expert.image);
+  const imageUrl = getStrapiMedia(article.image);
 
   const seo = {
-    metaTitle: expert.title,
-    metaDescription: expert.description,
-    shareImage: expert.image,
-    expert: true,
+    metaTitle: article.title,
+    metaDescription: article.description,
+    shareImage: article.image,
+    article: true,
   };
 
   return (
@@ -32,17 +32,17 @@ const Article = ({ expert, categories }) => {
         data-srcset={imageUrl}
         data-uk-img
       >
-        <h1>{expert.title}</h1>
+        <h1>{article.title}</h1>
       </div>
       <div className="uk-section">
         <div className="uk-container uk-container-small">
-          <ReactMarkdown source={expert.content} escapeHtml={false} />
+          <ReactMarkdown source={article.content} escapeHtml={false} />
           <hr className="uk-divider-small" />
           <div className="uk-grid-small uk-flex-left" data-uk-grid="true">
             <div>
-              {expert.author.picture && (
+              {article.author.picture && (
                 <Image
-                  image={expert.author.picture}
+                  image={article.author.picture}
                   style={{
                     position: "static",
                     borderRadius: "50%",
@@ -53,10 +53,10 @@ const Article = ({ expert, categories }) => {
             </div>
             <div className="uk-width-expand">
               <p className="uk-margin-remove-bottom">
-                By {expert.author.name}
+                By {article.author.name}
               </p>
               <p className="uk-text-meta uk-margin-remove-top">
-                <Moment format="MMM Do YYYY">{expert.published_at}</Moment>
+                <Moment format="MMM Do YYYY">{article.published_at}</Moment>
               </p>
             </div>
           </div>
@@ -67,26 +67,28 @@ const Article = ({ expert, categories }) => {
 };
 
 export async function getStaticPaths() {
-  const experts = await fetchAPI("/experts");
+  const articles = await fetchAPI("/activities");
 
   return {
-    paths: experts.map((expert) => ({
+    paths: articles.map((article) => ({
       params: {
-        id: expert.id+"",
+        id: article.id+"",
       },
     })),
-    fallback: false,
+    fallback: true,
   };
 }
 
 export async function getStaticProps({ params }) {
-  const experts = await fetchAPI(`/experts?id=${params.id}&status=published`);
-  const categories = await fetchAPI("/expert-categories");
+  const articles = await fetchAPI(
+    `/activities?id=${params.id}&status=published`
+  );
+  const categories = await fetchAPI("/categories");
 
   return {
-    props: { expert: experts[0], categories },
+    props: { article: articles[0], categories },
     revalidate: 1,
   };
 }
 
-export default Article;
+export default Activity;

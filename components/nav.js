@@ -13,7 +13,9 @@ const Nav = ({categories }) => {
           <ul className="uk-navbar-nav">
             <li>
               <Link href="/">
-                <a><Image image={banner} style={{position: "static",borderRadius: "5%",height: 60,}}/></a>
+                <a>
+                  <Image image={banner?banner:"images/biccenter-logo.jpg"} style={{position: "static",borderRadius: "5%",height: 60,}}/> 
+                </a>
               </Link>
             </li>
           </ul>
@@ -43,6 +45,11 @@ const Nav = ({categories }) => {
                 <li key="article">
                   <Link as={`/article`} href="/article">
                     <a className="uk-link-reset">质量与品牌专栏</a>
+                  </Link>
+                </li>
+                <li key="activity">
+                  <Link as={`/activity`} href="/activity">
+                    <a className="uk-link-reset">动态</a>
                   </Link>
                 </li>
             {/* {categories.map((category) => {

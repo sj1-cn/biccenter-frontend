@@ -5,8 +5,14 @@ import Layout from "../../components/layout";
 import Image from "../../components/image";
 import Seo from "../../components/seo";
 import { getStrapiMedia } from "../../lib/media";
+import { useRouter } from 'next/router'
 
 const Organization = ({ organization, categories }) => {
+  const router = useRouter();
+  if (router.isFallback) {
+    return <div>Loading...</div>;
+  }
+
   const imageUrl = getStrapiMedia(organization.image);
 
   const seo = {
@@ -69,7 +75,7 @@ export async function getStaticPaths() {
         id: organization.id+"",
       },
     })),
-    fallback: false,
+    fallback: true,
   };
 }
 
